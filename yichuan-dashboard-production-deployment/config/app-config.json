@@ -1,0 +1,53 @@
+{
+  "app": {
+    "name": "宜川县域监测体系整合平台",
+    "version": "2.5.2",
+    "buildDate": "2026-03-12",
+    "environment": "production"
+  },
+  "server": {
+    "port": 8080,
+    "host": "0.0.0.0",
+    "staticDir": "./dist"
+  },
+  "display": {
+    "resolution": {
+      "width": 6720,
+      "height": 1260
+    },
+    "modules": {
+      "videoWall": {
+        "widthPercent": 26,
+        "title": "视频监控墙"
+      },
+      "resourceDistribution": {
+        "widthPercent": 26,
+        "title": "应急资源分布"
+      },
+      "weatherHydrology": {
+        "widthPercent": 26,
+        "title": "气象与水利监测"
+      },
+      "soilMoisture": {
+        "widthPercent": 14,
+        "title": "土壤墒情监测"
+      }
+    }
+  },
+  "api": {
+    "timeout": 5000,
+    "retryCount": 3
+  },
+  "data": {
+    "refreshInterval": 10000,
+    "updateRange": 0.02,
+    "locations": [
+      "云岩镇阁楼社区白窑科村",
+      "壶口镇高柏新村", 
+      "英旺乡崾崄村",
+      "交里乡太山崾村",
+      "秋林镇辛户村",
+      "丹州街道办南关社区"
+    ]
+  }
+}
