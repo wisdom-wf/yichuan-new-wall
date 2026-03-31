@@ -2,10 +2,10 @@ const { defineConfig } = require('@vue/cli-service')
 
 module.exports = defineConfig({
   transpileDependencies: true,
-  publicPath: '/ycjctx/',
+  publicPath: '/',
   devServer: {
     host: 'localhost',
-    port: 8080,
+    port: 12300,
     open: true,
     client: {
       overlay: {

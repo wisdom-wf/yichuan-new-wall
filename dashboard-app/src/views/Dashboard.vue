@@ -74,7 +74,7 @@
         </div>
         
         <!-- 气象与水利监测模块 -->
-        <div class="module weather-hydrology-module">
+        <div class="module weather-hydrology-module" style="width: 2210px;">
           <div class="module-header">
             <h2>气象与水利监测</h2>
           </div>
@@ -87,9 +87,9 @@
               </div>
               <div class="chart-container">
                 <div class="chart-iframe-container">
-                  <iframe 
-                    src="" 
-                    class="chart-iframe" 
+                  <iframe
+                    :src="weatherChartUrl"
+                    class="chart-iframe"
                     frameborder="0"
                     sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox"
                     allow="fullscreen"
@@ -339,7 +339,7 @@ export default {
       currentTime: '',
       isSettingsModalVisible: false,
       inputUrl: '',
-      weatherChartUrl: '',
+      weatherChartUrl: 'http://10.172.13.31:50008',
       hydrologyChartUrl: 'https://www.wisdomdance.cn/ycsl/', // 水利监测图表 URL
       isWeatherSettingsVisible: false, // 气象设置弹窗
       isHydrologySettingsVisible: false, // 水利设置弹窗
@@ -394,13 +394,11 @@ export default {
   },
   mounted() {
     // 从本地存储加载保存的地址，如果没有则使用默认地址
-    this.weatherChartUrl = this.getFromLocalStorage(this.STORAGE_KEYS.WEATHER_URL, '') || '';
+    this.weatherChartUrl = this.getFromLocalStorage(this.STORAGE_KEYS.WEATHER_URL, 'http://10.172.13.31:50008') || 'http://10.172.13.31:50008';
     this.hydrologyChartUrl = this.getFromLocalStorage(this.STORAGE_KEYS.HYDROLOGY_URL, 'https://www.wisdomdance.cn/ycsl/') || 'https://www.wisdomdance.cn/ycsl/';
     
     // 初始化模块容器的宽度，确保可以横向滚动
     this.initModulesWidth();
-    // 初始化地图
-    this.initMaps();
     // 初始化时间显示
     this.updateDateTime();
     this.dateTimeInterval = setInterval(() => {
@@ -1630,7 +1628,7 @@ export default {
 }
 
 .soil-monitoring-module {
-  width: 1096px !important;
+  width: 731px !important;
 }
 
 /* ===== Module Header ===== */
@@ -2138,6 +2136,28 @@ export default {
 .metric-card:focus-visible {
   outline: 2px solid var(--primary);
   outline-offset: 3px;
+}
+
+.metric-card.location-changing {
+  animation: locationGlow 0.5s ease-out;
+}
+
+@keyframes locationGlow {
+  0% {
+    transform: scale(0.98);
+    box-shadow: 0 0 0 rgba(100, 181, 246, 0);
+    border-color: rgba(100, 181, 246, 0.3);
+  }
+  50% {
+    transform: scale(1.02);
+    box-shadow: 0 0 30px rgba(100, 181, 246, 0.6), 0 0 60px rgba(100, 181, 246, 0.3);
+    border-color: rgba(100, 181, 246, 0.8);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: var(--shadow-md);
+    border-color: rgba(100, 181, 246, 0.3);
+  }
 }
 
 .metric-label {
